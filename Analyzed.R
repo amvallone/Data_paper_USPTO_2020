@@ -26,7 +26,8 @@ for(x in 1:length(data)) {
 for (k in 1:length(data)){
   data[[k]] <- subset(data[[k]], subset=data[[k]][,"ipc_section"] %in% LETTERS[1:8] )
 }
- 
+
+# preparing the data for sna anañysis
 dd<-select(Reduce(rbind.fill,list(as.data.frame(t2007),as.data.frame(t2008),as.data.frame(t2009),as.data.frame(t2010),as.data.frame(t2011),as.data.frame(t2012),as.data.frame(t2013),as.data.frame(t2014),as.data.frame(t2015),as.data.frame(t2016),as.data.frame(t2017),as.data.frame(t2018),as.data.frame(t2019))),patent_id,inventor_id,patent_year,ipc_section)
 
 dd$patent_id<-as.character(dd$patent_id)
@@ -77,10 +78,7 @@ base2<-Reduce(rbind.fill,base2)
 base2<-distinct(base2)
 base2<-filter(base2,inv_i!=inv_j)
 
-#modificar section
-psection$ipc_section[psection$ipc_section=="e"]<-"E"
-psection$ipc_section[psection$ipc_section=="g"]<-"G"
-psection$ipc_section[psection$ipc_section=="h"]<-"H"
+
 #solo se considera section A-H
 pA<-psection %>% filter(ipc_section=="A")
 pB<-psection %>% filter(ipc_section=="B")
